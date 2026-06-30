@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="stylePerfil.css">
+</head>
+
+<body>
+    <button class="button" onclick="window.location.href='index.html'">Faztudo!</button>
+    <h1 class="titulo">Minha conta</h1>
+    <div class="perfil-card">
+        <div class="perfil-header">
+            <div class="avatar">👤</div>
+
+        </div>
+
+        <div class="perfil-body">
+            <label class="titulo">Informações Pessoais </label>
+            <br><br>
+            <label>Nome completo</label>
+            <input type="text" id="nome">
+
+            <label>Email</label>
+            <input type="email" id="email" disabled>
+
+            <label>telefone</label>
+            <input type="tel" id="telefone" disabled>
+
+            <label>Endereço</label>
+            <input type="text" id="endereco" disabled>
+
+        </div>
+    </div>
+    <button class="Sair"><a href="login.html">Sair da Conta</a></button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nome = localStorage.getItem("nomeUsuario");
+            const email = localStorage.getItem("emailUsuario");
+            const telefone = localStorage.getItem("telefoneUsuario");
+            const endereco = localStorage.getItem("enderecoUsuario");
+
+            console.log("Carregando:", nome, email, telefone, endereco);
+
+            document.getElementById("nome").value = nome || "";
+            document.getElementById("email").value = email || "";
+            document.getElementById("telefone").value = telefone || "";
+            document.getElementById("endereco").value = endereco || "";
+        });
+    </script>
+</body>
+
+</html>

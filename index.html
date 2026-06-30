@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="styleIndex.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <button class="button" onclick="window.location.href='index.html'">FazTudo!</button>
+    <!-- Botão -->
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <!-- Overlay (fundo escuro) -->
+    <div id="overlay" onclick="fecharMenu()"></div>
+    <!-- Menu -->
+    <div id="sidebar" class="sidebar">
+        <a href="perfil.html">Perfil</a>
+        <a href="sobreNos.html">Sobre Nós</a>
+        <a href="login.html">Sair</a>
+    </div>
+    <p class="welcome">Precisando de uma mãozinha?</p>
+    <p class="P">Encontre aqui a mão que vai solucionar seu problema</p>
+
+    <button class="cadastro" onclick="window.location.href='buscarServiço.html'">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Buscar Serviços
+    </button>
+    <button class="cadastro" onclick="window.location.href='fornecerServiço.html'">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Fornecer Serviços
+    </button>
+
+    <br><br>
+    <p class="welcome">Buscando Serviços</p>
+    <div id="lista-cards"></div>
+    <div class="carrossel">
+
+        <button class="seta esquerda" onclick="rolarCards(-300)">❮</button>
+
+        <div id="lista-perdidos"></div>
+        <!-- seus cards aqui -->
+        <button class="seta direita" onclick="rolarCards(300)">❯</button>
+    </div>
+    <p class="welcome">Serviços a disposição</p>
+    <div class="carrossel">
+        <button class="seta esquerda" onclick="rolarCards('encontrados', -300)">❮</button>
+
+        <div id="lista-encontrados"></div>
+
+        <button class="seta direita" onclick="rolarCards('encontrados', 300)">❯</button>
+    </div>
+
+
+
+
+    </div>
+
+    <script>
+        function rolarCards(tipo, valor) {
+            const container = document.getElementById(
+                tipo === "perdidos" ? "lista-perdidos" : "lista-encontrados"
+            );
+
+            container.scrollBy({
+                left: valor,
+                behavior: "smooth"
+            });
+        }
+
+        let lista = JSON.parse(localStorage.getItem("pets")) || [];
+
+        let containerPerdidos = document.getElementById("lista-perdidos");
+        let containerEncontrados = document.getElementById("lista-encontrados");
+
+        lista.forEach(pet => {
+            let card = document.createElement("div");
+            card.classList.add("card");
+
+            card.innerHTML = `
+        <img src="${pet.foto}" width="150">
+        <p class="perdido">Situação: ${pet.situacao}</p>
+        <p>Nome: ${pet.nome}</p>
+        <p>Descrição: ${pet.descricao}</p>
+        <p>Localização: ${pet.localizacao}</p>
+        <p>Cidade: ${pet.cidade}</p>
+        <p>Gênero: ${pet.genero}</p>
+        <p>Contato: ${pet.contato}</p>
+        <button class="btn-excluir">Excluir</button>
+    `;
+
+            // botão excluir
+            card.querySelector(".btn-excluir").addEventListener("click", function () {
+                let lista = JSON.parse(localStorage.getItem("pets")) || [];
+
+                lista = lista.filter(p => p.id !== pet.id);
+
+                localStorage.setItem("pets", JSON.stringify(lista));
+
+                card.remove();
+            });
+
+            // 👇 AQUI É O SEGREDO
+            if (pet.situacao === "perdido") {
+                containerPerdidos.appendChild(card);
+            } else {
+                containerEncontrados.appendChild(card);
+            }
+        });
+
+    </script>
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
