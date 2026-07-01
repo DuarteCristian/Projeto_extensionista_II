@@ -24,6 +24,7 @@ body {
     border: none;
     padding: 10px;
     cursor: pointer;
+
 }
 
 /* Menu lateral */
@@ -118,7 +119,7 @@ body {
     margin-top: -20px;
 }
 
-btn {
+.btn {
     background: #7B3FE4;
     color: white;
     border: none;
@@ -174,17 +175,11 @@ body::before {
     flex-shrink: 0;
 }
 
-#lista-perdidos {
+#lista-buscando,
+#lista-servicos {
     display: flex;
-    overflow-x: auto;
     gap: 20px;
-    padding: 10px;
-}
-
-#lista-encontrados {
-    display: flex;
     overflow-x: auto;
-    gap: 20px;
     padding: 10px;
 }
 

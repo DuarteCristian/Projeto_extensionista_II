@@ -15,7 +15,7 @@
 <body>
     <button class="button" onclick="window.location.href='index.html'">FazTudo!</button>
     <!-- Botão -->
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars" style="color:white;"></i>☰</button>
 
     <!-- Overlay (fundo escuro) -->
     <div id="overlay" onclick="fecharMenu()"></div>
@@ -42,19 +42,19 @@
     <div id="lista-cards"></div>
     <div class="carrossel">
 
-        <button class="seta esquerda" onclick="rolarCards(-300)">❮</button>
+        <button class="seta esquerda" onclick="rolarCards('Buscando', -300)">❮</button>
 
-        <div id="lista-perdidos"></div>
+        <div id="lista-buscando"></div>
         <!-- seus cards aqui -->
-        <button class="seta direita" onclick="rolarCards(300)">❯</button>
+        <button class="seta direita" onclick="rolarCards('Buscando', 300)">❯</button>
     </div>
     <p class="welcome">Serviços a disposição</p>
     <div class="carrossel">
-        <button class="seta esquerda" onclick="rolarCards('encontrados', -300)">❮</button>
+        <button class="seta esquerda" onclick="rolarCards('Fornecer', -300)">❮</button>
 
-        <div id="lista-encontrados"></div>
+        <div id="lista-servicos"></div>
 
-        <button class="seta direita" onclick="rolarCards('encontrados', 300)">❯</button>
+        <button class="seta direita" onclick="rolarCards('Fornecer', 300)">❯</button>
     </div>
 
 
@@ -65,7 +65,7 @@
     <script>
         function rolarCards(tipo, valor) {
             const container = document.getElementById(
-                tipo === "perdidos" ? "lista-perdidos" : "lista-encontrados"
+                tipo === "Buscando" ? "lista-buscando" : "lista-servicos"
             );
 
             container.scrollBy({
@@ -74,40 +74,40 @@
             });
         }
 
-        let lista = JSON.parse(localStorage.getItem("pets")) || [];
+        const buscando = JSON.parse(localStorage.getItem("Buscando")) || [];
+        const fornecendo = JSON.parse(localStorage.getItem("Fornecer")) || [];
 
-        let containerPerdidos = document.getElementById("lista-perdidos");
-        let containerEncontrados = document.getElementById("lista-encontrados");
+        let containerPerdidos = document.getElementById("lista-buscando");
+        let containerEncontrados = document.getElementById("lista-servicos");
 
-        lista.forEach(pet => {
+        [...buscando, ...fornecendo].forEach(serviço => {
             let card = document.createElement("div");
             card.classList.add("card");
 
             card.innerHTML = `
-        <img src="${pet.foto}" width="150">
-        <p class="perdido">Situação: ${pet.situacao}</p>
-        <p>Nome: ${pet.nome}</p>
-        <p>Descrição: ${pet.descricao}</p>
-        <p>Localização: ${pet.localizacao}</p>
-        <p>Cidade: ${pet.cidade}</p>
-        <p>Gênero: ${pet.genero}</p>
-        <p>Contato: ${pet.contato}</p>
+        <img src="${serviço.foto}" width="150">
+        <p class="perdido">Situação: ${serviço.situacao}</p>
+        <p>Nome: ${serviço.nome}</p>
+        <p>Descrição: ${serviço.descricao}</p>
+        <p>Cidade: ${serviço.cidade}</p>
+        <p>Gênero: ${serviço.genero}</p>
+        <p>Contato: ${serviço.contato}</p>
         <button class="btn-excluir">Excluir</button>
     `;
 
             // botão excluir
             card.querySelector(".btn-excluir").addEventListener("click", function () {
-                let lista = JSON.parse(localStorage.getItem("pets")) || [];
+                let lista = JSON.parse(localStorage.getItem("Buscando")) || [];
 
-                lista = lista.filter(p => p.id !== pet.id);
+                lista = lista.filter(p => p.id !== serviço.id);
 
-                localStorage.setItem("pets", JSON.stringify(lista));
+                localStorage.setItem("Buscando", JSON.stringify(lista));
 
                 card.remove();
             });
 
-            // 👇 AQUI É O SEGREDO
-            if (pet.situacao === "perdido") {
+
+            if (serviço.situacao === "Buscando") {
                 containerPerdidos.appendChild(card);
             } else {
                 containerEncontrados.appendChild(card);

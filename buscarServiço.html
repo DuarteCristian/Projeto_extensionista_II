@@ -4,75 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Pet</title>
-    <link rel="stylesheet" href="styleBuscarPet.css">
+    <title>Buscar Serviço</title>
+    <link rel="stylesheet" href="styleBuscarServiço.css">
 </head>
 
 <body>
-    <button class="button" onclick="window.location.href='index.html'">EncontrePet</button>
+    <button class="button" onclick="window.location.href='index.html'">FazTudo!</button>
 
     <div class="container">
         <div class="lado-esquerdo">
-            <h1 class="welcome">Criar Anúncio do Pet</h1><br>
-            <p class="P">Crie gratuitamente seu anúncio para acessar o Painel de Busca do pet.<br>
+            <h1 class="welcome">Criar Anúncio Buscando Serviço</h1><br>
+            <p class="P">Crie gratuitamente seu anúncio para acessar o Painel de Busca Serviços.<br>
                 Onde você poderá
                 acessar
                 ferramentas de divulgação com eficácia comprovada no Brasil inteiro.</p>
         </div>
         <div class="lado-direito">
             <div class="form-box">
-                <h3>Adicione uma foto de seu pet</h3>
-                <form id="formPet">
+                <h3>Adicione suas informações</h3>
+                <form id="formServiço">
 
-                    <select id="perdido">
-                        <option value="perdido">Perdido</option>
+                    <select id="Buscando">
+                        <option value="Buscando">Buscando Serviço</option>
 
                     </select>
-                    <input type="text" id="nome" placeholder="Nome do pet" required>
-                    <input type="text" id="descricao" placeholder="Descrição" required>
-                    <input type="text" id="localizacao" placeholder="Ultimo local Visto" required>
+                    <input type="text" id="nome" placeholder="Nome Completo" required>
+                    <input type="text" id="descricao" placeholder="Descrição da Atividade" required>
                     <input type="text" id="cidade" placeholder="Qual cidade é?" required>
                     <input type="text" id="genero" placeholder="Gênero" required>
+                    <input type="text" id="contato" placeholder="Contato (telefone ou email)" required>
                     <input type="file" id="foto" accept="image/*" required>
                     <button class="prosseguir" type="submit">Cadastrar</button>
-                    <button class="cadastro" onclick="window.location.href='index.html'">
+                    <button type="submit" class="voltar" onclick="window.location.href='index.html'">
                         menu inicial
                     </button>
                 </form>
                 <script>
-                    document.getElementById("formPet").addEventListener("submit", function (e) {
+                    document.getElementById("formServiço").addEventListener("submit", function (e) {
                         e.preventDefault();
-                        let situacao = document.getElementById("perdido").value;
+                        let situacao = document.getElementById("Buscando").value;
                         let nome = document.getElementById("nome").value;
                         let descricao = document.getElementById("descricao").value;
                         let fotoInput = document.getElementById("foto");
-                        let localizacao = document.getElementById("localizacao").value;
                         let cidade = document.getElementById("cidade").value;
                         let genero = document.getElementById("genero").value;
+                        let contato = document.getElementById("contato").value;
 
                         let reader = new FileReader();
 
                         reader.onload = function () {
                             let fotoBase64 = reader.result;
 
-                            let pet = {
+                            let serviço = {
                                 id: Date.now(),
                                 situacao: situacao,
                                 nome: nome,
                                 descricao: descricao,
                                 foto: fotoBase64,
-                                localizacao: localizacao,
                                 cidade: cidade,
-                                genero: genero
+                                genero: genero,
+                                contato: contato
                             };
 
                             // Pega lista existente ou cria nova
-                            let lista = JSON.parse(localStorage.getItem("pets")) || [];
-                            lista.push(pet);
+                            let lista = JSON.parse(localStorage.getItem("Buscando")) || [];
+                            lista.push(serviço);
 
-                            localStorage.setItem("pets", JSON.stringify(lista));
+                            localStorage.setItem("Buscando", JSON.stringify(lista));
 
-                            alert("Pet cadastrado!");
+                            alert("Serviço cadastrado!");
 
                             // Redireciona para página principal
                             window.location.href = "index.html";

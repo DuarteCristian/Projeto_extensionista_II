@@ -66,3 +66,19 @@ body::before {
     margin: 20px;
     margin-top: -20px;
 }
+
+.Sair {
+    width: 500px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: rgb(250, 0, 0);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    position: absolute;
+    top: 600px;
+    left: 500px;
+
+}

@@ -2,7 +2,6 @@
 .button {
     font-style: italic;
     font-size: 40px;
-    tranparent: true;
     background-color: transparent;
     border: none;
     color: rgb(253, 253, 253);
@@ -116,7 +115,7 @@ select:focus {
     right: auto
 }
 
-.cadastro {
+.voltar {
     background: rgb(247, 8, 0);
     color: rgb(255, 252, 252);
     border: none;
@@ -125,7 +124,6 @@ select:focus {
     cursor: pointer;
     border-radius: 5px;
     margin: 40px;
-    margin-top: 130px;
+    margin-top: -130px;
     left: 2000px;
 }
-
